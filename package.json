@@ -1,0 +1,27 @@
+{
+  "name": "@gmmorris/bs-rewire",
+  "version": "0.1.0",
+  "description": "BuckleScript bindings to the Rewire node test monkey-patching utility",
+  "scripts": {
+    "build": "bsb -make-world",
+    "start": "bsb -make-world -w",
+    "clean": "bsb -clean-world",
+    "test": "jest --watch RewireTest"
+  },
+  "keywords": [
+    "BuckleScript"
+  ],
+  "author": "Gidi Meir Morris <gidi@gidi.io>",
+  "license": "MIT",
+  "files": [
+    "src/",
+    "bsconfig.json"
+  ],
+  "devDependencies": {
+    "@glennsl/bs-jest": "^0.4.2",
+    "bs-platform": "^3.0.0"
+  },
+  "dependencies": {
+    "rewire": "^4.0.1"
+  }
+}
