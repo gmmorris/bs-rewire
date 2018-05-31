@@ -1,6 +1,8 @@
 # bs-rewire
 
 [BuckleScript](https://github.com/bucklescript/bucklescript) bindings for [Rewire](https://github.com/jhnns/rewire)
+![alt TravisCI Build](https://travis-ci.org/gmmorris/bs-rewire.svg?branch=master)
+
 
 ## Example
 
