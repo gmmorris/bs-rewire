@@ -1,27 +1,46 @@
-type rewired;
+type rewired('a) = 'a;
 
-[@bs.send] external set : (rewired, string, 'a) => unit = "__set__";
-
-[@bs.send] external setAll : (rewired, Js.Dict.t('a)) => unit = "__set__";
-
-[@bs.send] external get : (rewired, string) => 'a = "__get__";
+type emptyModule;
 
 type rewiringCallback = unit => unit;
 
-type rewiringAsyncCallback('a) = unit => Js.Promise.t('a);
+type rewiringAsyncCallback('x) = unit => Js.Promise.t('x);
 
 type rewiringExecutor = rewiringCallback => unit;
 
-type rewiringAsyncExecutor('a) =
-  rewiringAsyncCallback('a) => Js.Promise.t('a);
+type rewiringAsyncExecutor('x) =
+  rewiringAsyncCallback('x) => Js.Promise.t('x);
 
-[@bs.send]
-external withRewiring : (rewired, Js.Dict.t('a)) => rewiringExecutor =
-  "__with__";
+module type RewiredModule = {
+  type t;
+  let set: (t, string, 'b) => unit;
+  let setAll: (t, Js.Dict.t('b)) => unit;
+  let get: (t, string) => 'b;
+  let withRewiring: (t, Js.Dict.t('b)) => rewiringExecutor;
+  let withAsyncRewiring: (t, Js.Dict.t('b)) => rewiringAsyncExecutor('x);
+};
 
-[@bs.send]
-external withAsyncRewiring :
-  (rewired, Js.Dict.t('a)) => rewiringAsyncExecutor('b) =
-  "__with__";
+module MakeRewired = (T: {type t;}) : (RewiredModule with type t = T.t) => {
+  type t = T.t;
+  [@bs.send] external set : (T.t, string, 'b) => unit = "__set__";
+  [@bs.send] external setAll : (T.t, Js.Dict.t('b)) => unit = "__set__";
+  [@bs.send] external get : (T.t, string) => 'b = "__get__";
+  [@bs.send]
+  external withRewiring : (T.t, Js.Dict.t('b)) => rewiringExecutor =
+    "__with__";
+  [@bs.send]
+  external withAsyncRewiring :
+    (T.t, Js.Dict.t('b)) => rewiringAsyncExecutor('x) =
+    "__with__";
+};
 
-[@bs.module] external rewire : string => rewired = "";
+module Rewired = {
+  include
+    MakeRewired(
+      {
+        type t;
+      },
+    );
+};
+
+[@bs.module] external rewire : string => Rewired.t = "";
