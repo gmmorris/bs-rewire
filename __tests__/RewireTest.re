@@ -46,6 +46,20 @@ describe("Rewire", () => {
     })
   );
   Expect.(
+    test("rewire.set returns a reset function", () => {
+      let rewiredModule = rewire("./assets/testAsset.js");
+      expect(getParam(rewiredModule)) |> toEqual("someValue");
+      let reset = Rewired.set(
+        rewiredModule,
+        "someModule",
+        oneParamModuleToJs({param: "someMockedValue"}),
+      );
+      expect(getParam(rewiredModule)) |> toEqual("someMockedValue");
+      reset();
+      expect(getParam(rewiredModule)) |> toEqual("someValue");
+    })
+  );
+  Expect.(
     test("rewire.setAll sets multiple values in a module", () => {
       let all = Js.Dict.empty();
       Js.Dict.set(

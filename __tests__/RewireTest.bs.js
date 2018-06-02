@@ -47,6 +47,16 @@ describe("Rewire", (function () {
                     });
                 return Jest.Expect[/* toEqual */12]("someMockedValue", Jest.Expect[/* expect */0](Curry._1(getParam, rewiredModule)));
               }));
+        Jest.test("rewire.set returns a reset function", (function () {
+                var rewiredModule = Rewire("./assets/testAsset.js");
+                Jest.Expect[/* toEqual */12]("someValue", Jest.Expect[/* expect */0](Curry._1(getParam, rewiredModule)));
+                var reset = Rewire$BsRewire.Rewired[/* set */0](rewiredModule, "someModule", {
+                      param: /* param */"someMockedValue"
+                    });
+                Jest.Expect[/* toEqual */12]("someMockedValue", Jest.Expect[/* expect */0](Curry._1(getParam, rewiredModule)));
+                Curry._1(reset, /* () */0);
+                return Jest.Expect[/* toEqual */12]("someValue", Jest.Expect[/* expect */0](Curry._1(getParam, rewiredModule)));
+              }));
         Jest.test("rewire.setAll sets multiple values in a module", (function () {
                 var all = { };
                 all["someModule"] = {

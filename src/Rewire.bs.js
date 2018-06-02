@@ -5,12 +5,10 @@
 function MakeRewired() {
   return /* module */[
           /* __set__ */(function (prim, prim$1, prim$2) {
-              prim.__set__(prim$1, prim$2);
-              return /* () */0;
+              return prim.__set__(prim$1, prim$2);
             }),
           /* __set__ */(function (prim, prim$1) {
-              prim.__set__(prim$1);
-              return /* () */0;
+              return prim.__set__(prim$1);
             }),
           /* __get__ */(function (prim, prim$1) {
               return prim.__get__(prim$1);
@@ -29,13 +27,11 @@ function MakeModuleRewiring() {
 }
 
 function set(prim, prim$1, prim$2) {
-  prim.__set__(prim$1, prim$2);
-  return /* () */0;
+  return prim.__set__(prim$1, prim$2);
 }
 
 function setAll(prim, prim$1) {
-  prim.__set__(prim$1);
-  return /* () */0;
+  return prim.__set__(prim$1);
 }
 
 function get(prim, prim$1) {
