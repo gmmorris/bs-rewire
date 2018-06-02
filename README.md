@@ -58,10 +58,10 @@ The MakeRewired & MakeModuleRewiring Functors allow you to create a custom Rewir
 
 <br />
 
-EXAMPLES IN REASONML
----
+Examples In ReasonML
+--
 
-## Example #1 : Basic Use Case
+### Example #1 : Basic Use Case
 
 The following is the basic use case.
 In this use case the following approach is being taken:
@@ -70,7 +70,7 @@ In this use case the following approach is being taken:
 - The mock value is a JS object created using Bucklescript's jsConverter generator.
 - As the rewiredModule only has the Rewire API we then need to use some Raw JS to trick the Reason compiler into letting us call the 'getParam' within the testAsset module.
 
-### testAsset.js
+#### testAsset.js
 The module we wish to rewire
 ```javascript
 /*
@@ -84,7 +84,7 @@ module.exports = {
   }
 };
 ```
-### Test.re
+#### Test.re
 The test file which uses rewire to test the testAsset.js file
 ```reason
 open Jest;
@@ -120,11 +120,11 @@ describe("testAsset.getParam", () => {
 
 ```
 
-## Example #2 : Custom JS API of module using MakeModuleRewiring & MakeRewired
+### Example #2 : Custom JS API of module
 The downside to Example #1 is that we have to use Raw JS to trick the compiler.
 This means our tests are no longer type safe - seems to defeat the purpose of using ReasonML, doesn't it?
 
-### MakeRewired
+#### MakeRewired
 Start by defining a custom API which mirrors the API of the JS module you're testing.
 If we take our testAsset.js as an example, we have a single function, `getParam`, which returns a string.
 ```reason
@@ -140,7 +140,7 @@ module TestAssetModule = {
 ```
 Using `MakeRewired` allows us to define out single function on our module and extend this module with the Rewire API.
 
-### MakeModuleRewiring
+#### MakeModuleRewiring
 Now that we have a type which mirrors our JS module, we can use `MakeModuleRewiring` to create a custom 'Rewire.rewire()' function which will return our custom module type.
 This makes it possible for us to call `getParam` directly.
 
