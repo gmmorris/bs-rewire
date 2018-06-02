@@ -2,10 +2,24 @@
 
 [BuckleScript](https://github.com/bucklescript/bucklescript) bindings for [Rewire](https://github.com/jhnns/rewire)
 
-rewire adds a special setter and getter to modules so you can modify their behaviour for better unit testing.
+Rewire adds a special setter and getter to modules so you can modify their behaviour for better unit testing.
 bs-rewire provides the bindings to allow you to use the familiar rewire approach to test your ReasonML and oCaml code when targetting the Node ecosystem through Bucklescript (damn, that was amouthful, wasn't it?).
 
+<br />
 
+## Installation
+
+```sh
+npm install --save-dev @gmmorris/bs-rewire
+```
+
+Then add `@gmmorris/bs-rewire` to `bs-dev-dependencies` in your `bsconfig.json`:
+```js
+{
+  ...
+  "bs-dev-dependencies": ["@gmmorris/bs-rewire"]
+}
+```
 <br />
 
 API
@@ -43,7 +57,8 @@ The MakeRewired & MakeModuleRewiring Functors allow you to create a custom Rewir
 
 
 <br />
-Examples in ReasonML
+
+EXAMPLES IN REASONML
 ---
 
 ## Example #1 : Basic Use Case
@@ -56,8 +71,8 @@ In this use case the following approach is being taken:
 - As the rewiredModule only has the Rewire API we then need to use some Raw JS to trick the Reason compiler into letting us call the 'getParam' within the testAsset module.
 
 ### testAsset.js
-The module we wish to reire
-``javascript
+The module we wish to rewire
+```javascript
 /*
  * This module returns a simple object: { param: "someValue" }
  */
@@ -163,16 +178,3 @@ describe("testAsset.getParam", () =>
 
 See [the tests](https://github.com/gmmorris/bs-rewire/tree/master/__tests__) for more examples.
 
-## Installation
-
-```sh
-npm install --save-dev @gmmorris/bs-rewire
-```
-
-Then add `@gmmorris/bs-rewire` to `bs-dev-dependencies` in your `bsconfig.json`:
-```js
-{
-  ...
-  "bs-dev-dependencies": ["@gmmorris/bs-rewire"]
-}
-```
