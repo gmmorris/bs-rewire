@@ -24,6 +24,10 @@ function MakeRewired() {
         ];
 }
 
+function MakeModuleRewiring() {
+  return /* module */[];
+}
+
 function set(prim, prim$1, prim$2) {
   prim.__set__(prim$1, prim$2);
   return /* () */0;
@@ -55,5 +59,6 @@ var Rewired = /* module */[
 ];
 
 exports.MakeRewired = MakeRewired;
+exports.MakeModuleRewiring = MakeModuleRewiring;
 exports.Rewired = Rewired;
 /* No side effect */

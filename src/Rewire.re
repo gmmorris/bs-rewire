@@ -34,6 +34,10 @@ module MakeRewired = (T: {type t;}) : (RewiredModule with type t = T.t) => {
     "__with__";
 };
 
+module MakeModuleRewiring = (T: {type t;}) => {
+  [@bs.module] external rewire : string => T.t = "";
+};
+
 module Rewired = {
   include
     MakeRewired(
@@ -43,4 +47,4 @@ module Rewired = {
     );
 };
 
-[@bs.module] external rewire : string => Rewired.t = "";
+include MakeModuleRewiring(Rewired);

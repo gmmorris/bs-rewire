@@ -30,17 +30,17 @@ function oneParamModuleFromJs(param) {
 
 describe("Rewire", (function () {
         Jest.test("rewire requires a module", (function () {
-                var rewiredModule = Rewire("./testAsset.js");
+                var rewiredModule = Rewire("./assets/testAsset.js");
                 return Jest.Expect[/* toEqual */12]("someValue", Jest.Expect[/* expect */0](Curry._1(getParam, rewiredModule)));
               }));
         Jest.test("rewire.get gets a named value in a module", (function () {
-                var rewiredModule = Rewire("./testAsset.js");
+                var rewiredModule = Rewire("./assets/testAsset.js");
                 return Jest.Expect[/* toEqual */12]({
                             param: /* param */"someValue"
                           }, Jest.Expect[/* expect */0](Rewire$BsRewire.Rewired[/* get */2](rewiredModule, "someModule")));
               }));
         Jest.test("rewire.set sets a value in a module", (function () {
-                var rewiredModule = Rewire("./testAsset.js");
+                var rewiredModule = Rewire("./assets/testAsset.js");
                 Jest.Expect[/* toEqual */12]("someValue", Jest.Expect[/* expect */0](Curry._1(getParam, rewiredModule)));
                 Rewire$BsRewire.Rewired[/* set */0](rewiredModule, "someModule", {
                       param: /* param */"someMockedValue"
@@ -55,13 +55,13 @@ describe("Rewire", (function () {
                 all["someOtherModule"] = {
                   param: /* param */"someOtherMockedValue"
                 };
-                var rewiredModule = Rewire("./testAsset.js");
+                var rewiredModule = Rewire("./assets/testAsset.js");
                 Rewire$BsRewire.Rewired[/* setAll */1](rewiredModule, all);
                 Jest.Expect[/* toEqual */12]("someMockedValue", Jest.Expect[/* expect */0](Curry._1(getParam, rewiredModule)));
                 return Jest.Expect[/* toEqual */12]("someOtherMockedValue", Jest.Expect[/* expect */0](Curry._1(getOtherParam, rewiredModule)));
               }));
         Jest.testAsync(/* None */0, "rewire.withRewiring takes a callback in which values are mocked", (function (finish) {
-                var rewiredModule = Rewire("./testAsset.js");
+                var rewiredModule = Rewire("./assets/testAsset.js");
                 var all = { };
                 all["someModule"] = {
                   param: /* param */"someMockedValue"
@@ -72,7 +72,7 @@ describe("Rewire", (function () {
                             }));
               }));
         return Jest.testAsync(/* None */0, "rewire.withAsyncRewiring take a promised callback which resolves with variables reset to their original value", (function (finish) {
-                      var rewiredModule = Rewire("./testAsset.js");
+                      var rewiredModule = Rewire("./assets/testAsset.js");
                       var all = { };
                       all["someModule"] = {
                         param: /* param */"someMockedValue"
