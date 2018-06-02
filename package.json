@@ -6,7 +6,10 @@
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
-    "test": "npm run clean && npm run build && jest RewireTest"
+    "test": "npm run clean && npm run build && jest RewireTest",
+    "watch:bsb": "npm start",
+    "watch:jest": "jest RewireTest --watchAll",
+    "watch:screen": "screen -c .screenrc"
   },
   "keywords": [
     "BuckleScript"
