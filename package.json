@@ -12,10 +12,21 @@
     "watch:screen": "screen -c .screenrc"
   },
   "keywords": [
-    "BuckleScript"
+    "BuckleScript",
+    "Rewire",
+    "Testing",
+    "OCaml",
+    "ReasonML"
   ],
   "author": "Gidi Meir Morris <gidi@gidi.io>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmmorris/bs-rewire.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gmmorris/bs-rewire/issues"
+  },
   "files": [
     "src/",
     "bsconfig.json"

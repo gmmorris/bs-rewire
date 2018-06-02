@@ -3,7 +3,7 @@
 [BuckleScript](https://github.com/bucklescript/bucklescript) bindings for [Rewire](https://github.com/jhnns/rewire)
 
 Rewire adds a special setter and getter to modules so you can modify their behaviour for better unit testing.
-bs-rewire provides the bindings to allow you to use the familiar rewire approach to test your ReasonML and oCaml code when targetting the Node ecosystem through Bucklescript (damn, that was amouthful, wasn't it?).
+bs-rewire provides the bindings to allow you to use the familiar rewire approach to test your ReasonML and OCaml code when targetting the Node ecosystem through Bucklescript (damn, that was amouthful, wasn't it?).
 
 <br />
 
