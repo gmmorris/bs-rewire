@@ -1,5 +1,8 @@
 open Jest;
 open Rewire;
+
+let testAssetLocation = "../../../__tests__/assets/testAsset.js";
+
 let getParam = [%raw
   {|
         function(rewiredModule) {
@@ -22,20 +25,20 @@ type oneParamModule = {param: string};
 describe("Rewire", () => {
   Expect.(
     test("rewire requires a module", () => {
-      let rewiredModule = rewire("./assets/testAsset.js");
+      let rewiredModule = rewire(testAssetLocation);
       expect(getParam(rewiredModule)) |> toEqual("someValue");
     })
   );   
   Expect.(
     test("rewire.get gets a named value in a module", () => {
-      let rewiredModule = rewire("./assets/testAsset.js");
+      let rewiredModule = rewire(testAssetLocation);
       expect(Rewired.get(rewiredModule, "someModule"))
       |> toEqual(oneParamModuleToJs({param: "someValue"}));
     })
   );
   Expect.(
     test("rewire.set sets a value in a module", () => {
-      let rewiredModule = rewire("./assets/testAsset.js");
+      let rewiredModule = rewire(testAssetLocation);
       expect(getParam(rewiredModule)) |> toEqual("someValue");
       Rewired.set(
         rewiredModule,
@@ -47,7 +50,7 @@ describe("Rewire", () => {
   );
   Expect.(
     test("rewire.set returns a reset function", () => {
-      let rewiredModule = rewire("./assets/testAsset.js");
+      let rewiredModule = rewire(testAssetLocation);
       expect(getParam(rewiredModule)) |> toEqual("someValue");
       let reset = Rewired.set(
         rewiredModule,
@@ -72,7 +75,7 @@ describe("Rewire", () => {
         "someOtherModule",
         oneParamModuleToJs({param: "someOtherMockedValue"}),
       );
-      let rewiredModule = rewire("./assets/testAsset.js");
+      let rewiredModule = rewire(testAssetLocation);
       Rewired.setAll(rewiredModule, all);
       expect(getParam(rewiredModule)) |> toEqual("someMockedValue");
       expect(getOtherParam(rewiredModule))
@@ -81,7 +84,7 @@ describe("Rewire", () => {
   );
   Expect.(
     testAsync("rewire.withRewiring takes a callback in which values are mocked", finish => {
-      let rewiredModule = rewire("./assets/testAsset.js");
+      let rewiredModule = rewire(testAssetLocation);
       let all = Js.Dict.empty();
       Js.Dict.set(
         all,
@@ -98,7 +101,7 @@ describe("Rewire", () => {
   );
   Expect.(
     testAsync("rewire.withAsyncRewiring take a promised callback which resolves with variables reset to their original value", finish => {
-      let rewiredModule = rewire("./assets/testAsset.js");
+      let rewiredModule = rewire(testAssetLocation);
       let all = Js.Dict.empty();
       Js.Dict.set(
         all,

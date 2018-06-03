@@ -1,7 +1,3 @@
-type rewired('a) = 'a;
-
-type emptyModule;
-
 type rewiringCallback = unit => unit;
 
 type rewiringAsyncCallback('x) = unit => Js.Promise.t('x);

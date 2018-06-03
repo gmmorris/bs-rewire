@@ -2,6 +2,7 @@ open Jest;
 
 open Rewire;
 
+let testAssetLocation = "../../../__tests__/assets/testAsset.js";
 module TestAssetModule = {
   include
     MakeRewired(
@@ -21,7 +22,7 @@ describe("Rewire", () =>
     test(
       "MakeRewired & MakeModuleRewiring can be used to define custom module APIs",
       () => {
-      let rewiredModule = TestAssetRewirting.rewire("./assets/testAsset.js");
+      let rewiredModule = TestAssetRewirting.rewire(testAssetLocation);
       expect(TestAssetModule.getParam(rewiredModule))
       |> toEqual("someValue");
     })

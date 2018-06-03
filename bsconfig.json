@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "sources": [
     {
-      "dir": "src",
-      "subdirs": true
+      "dir": "src"
     },
     {
       "dir": "__tests__",
@@ -12,8 +11,7 @@
     }
   ],
   "package-specs": {
-    "module": "commonjs",
-    "in-source": true
+    "module": "commonjs"
   },
   "suffix": ".bs.js",
   "bs-dependencies": [],
