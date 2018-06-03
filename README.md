@@ -138,7 +138,7 @@ module TestAssetModule = {
   [@bs.send] external getParam : t => string = "";
 };
 ```
-Using `MakeRewired` allows us to define out single function on our module and extend this module with the Rewire API.
+Using `MakeRewired` allows us to define our single function on our module and extend this module with the Rewire API.
 
 #### MakeModuleRewiring
 Now that we have a type which mirrors our JS module, we can use `MakeModuleRewiring` to create a custom 'Rewire.rewire()' function which will return our custom module type.
@@ -159,7 +159,7 @@ module TestAssetModule = {
   [@bs.send] external getParam : t => string = "";
 };
 
-module TestAssetRewirting = {
+module TestAssetRewiring = {
   include MakeModuleRewiring(TestAssetModule);
 };
 
@@ -168,7 +168,7 @@ describe("testAsset.getParam", () =>
     test(
       "getParam returns the value in the global `someModule.param`",
       () => {
-      let rewiredModule = TestAssetRewirting.rewire("./assets/testAsset.js");
+      let rewiredModule = TestAssetRewiring.rewire("./assets/testAsset.js");
       expect(TestAssetModule.getParam(rewiredModule))
       |> toEqual("someValue");
     })
