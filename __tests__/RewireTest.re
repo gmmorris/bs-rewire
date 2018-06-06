@@ -100,6 +100,17 @@ describe("Rewire", () => {
     })
   );
   Expect.(
+    testAsync("rewire.withRewiring supports direct reference of a global variable", finish => {
+      let rewiredModule = rewire(testAssetLocation);
+      let rewiringCallback = Rewired.withRewiringOver(rewiredModule, "someModule", oneParamModuleToJs({param: "someMockedValue"}));
+      rewiringCallback(() =>
+        finish(
+          expect(getParam(rewiredModule)) |> toEqual("someMockedValue"),
+        )
+      );
+    })
+  );
+  Expect.(
     testAsync("rewire.withAsyncRewiring take a promised callback which resolves with variables reset to their original value", finish => {
       let rewiredModule = rewire(testAssetLocation);
       let all = Js.Dict.empty();
@@ -109,6 +120,16 @@ describe("Rewire", () => {
         oneParamModuleToJs({param: "someMockedValue"}),
       );
       let rewiringCallback = Rewired.withAsyncRewiring(rewiredModule, all);
+      rewiringCallback(() => Js.Promise.resolve())
+      |> Js.Promise.then_(_ => Js.Promise.resolve(finish(expect(getParam(rewiredModule)) |> toEqual("someValue"))))
+      |> ignore;
+      ();
+    })
+  );
+  Expect.(
+    testAsync("rewire.withAsyncRewiring supports direct reference of a global variable", finish => {
+      let rewiredModule = rewire(testAssetLocation);
+      let rewiringCallback = Rewired.withAsyncRewiringOver(rewiredModule, "someModule", oneParamModuleToJs({param: "someMockedValue"}));
       rewiringCallback(() => Js.Promise.resolve())
       |> Js.Promise.then_(_ => Js.Promise.resolve(finish(expect(getParam(rewiredModule)) |> toEqual("someValue"))))
       |> ignore;

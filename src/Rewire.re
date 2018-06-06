@@ -15,7 +15,9 @@ module type RewiredModule = {
   let setAll: (t, Js.Dict.t('b)) => reset;
   let get: (t, string) => 'b;
   let withRewiring: (t, Js.Dict.t('b)) => rewiringExecutor;
+  let withRewiringOver: (t, string, 'b) => rewiringExecutor;
   let withAsyncRewiring: (t, Js.Dict.t('b)) => rewiringAsyncExecutor('x);
+  let withAsyncRewiringOver: (t, string, 'b) => rewiringAsyncExecutor('x);
 };
 
 module MakeRewired = (T: {type t;}) : (RewiredModule with type t = T.t) => {
@@ -30,6 +32,16 @@ module MakeRewired = (T: {type t;}) : (RewiredModule with type t = T.t) => {
   external withAsyncRewiring :
     (T.t, Js.Dict.t('b)) => rewiringAsyncExecutor('x) =
     "__with__";
+  let withRewiringOver = (rewiredModule: T.t, key: string, value: 'b) => {
+    let all = Js.Dict.empty();
+    Js.Dict.set(all, key, value);
+    withRewiring(rewiredModule, all);
+  };
+  let withAsyncRewiringOver = (rewiredModule: T.t, key: string, value: 'b) => {
+    let all = Js.Dict.empty();
+    Js.Dict.set(all, key, value);
+    withAsyncRewiring(rewiredModule, all);
+  };
 };
 
 module MakeModuleRewiring = (T: {type t;}) => {
