@@ -6,6 +6,7 @@
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
+    "interface": "bsc -bs-re-out lib/bs/src/Rewire.cmi > src/Rewire.rei",
     "test": "npm run clean && npm run build && jest .*bs.js",
     "watch:bsb": "npm start",
     "watch:jest": "jest .*bs.js --watchAll",
