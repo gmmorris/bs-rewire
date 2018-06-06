@@ -5,4 +5,3 @@ npm-debug.log
 /lib/bs/
 /node_modules/
 .vscode
-package-lock.json
