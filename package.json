@@ -1,6 +1,6 @@
 {
   "name": "@gmmorris/bs-rewire",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "BuckleScript bindings to the Rewire unit test monkey-patching utility",
   "scripts": {
     "build": "bsb -make-world",
